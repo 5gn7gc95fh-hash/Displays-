@@ -1,0 +1,21 @@
+INVENTARIO DISPLAYS PRO - VERSION NO ZOOM
+
+CAMBIO APLICADO:
+- La pagina queda bloqueada contra zoom en iPhone/Safari.
+- Se corrigio el zoom automatico al tocar inputs usando font-size 16px.
+- Se agrego bloqueo para doble toque, gesto de pellizco y viewport user-scalable=no.
+
+ARCHIVOS:
+- index.html: pagina principal lista para subir a Netlify o GitHub Pages.
+- manifest.webmanifest: configuracion PWA basica.
+- icon.svg: icono para pantalla de inicio.
+
+COMO SUBIR A NETLIFY:
+1. Entra a Netlify.
+2. Arrastra esta carpeta o este ZIP descomprimido.
+3. Asegurate de que index.html quede en la raiz.
+
+IMPORTANTE:
+Los datos se guardan localmente en el navegador con localStorage.
+Antes de reemplazar la pagina, exporta tu respaldo JSON desde la app actual.
+Luego importa ese JSON en esta version.

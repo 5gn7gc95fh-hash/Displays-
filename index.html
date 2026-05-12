@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Inventario Displays Pro">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <title>Inventario Displays Pro + Pedido - Limpio + Pedido</title>
+  <style>
+    :root{
+      --bg:#f4f6fb; --card:#ffffff; --text:#111827; --muted:#6b7280; --line:#e5e7eb;
+      --dark:#111827; --blue:#2563eb; --green:#16a34a; --red:#dc2626; --amber:#f59e0b;
+      --radius:16px; --shadow:0 8px 24px rgba(15,23,42,.07);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{
+      margin:0;min-height:100%;background:var(--bg);color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior:none;
+    }
+    body{padding:12px;padding-bottom:96px;max-width:980px;margin-inline:auto;}
+    button,input,select,textarea{font-family:inherit;font-size:16px!important;}
+    input,select,textarea{
+      width:100%;border:1px solid #d1d5db;border-radius:13px;padding:12px;background:#fff;color:#111827;outline:none;
+    }
+    input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+    textarea{min-height:76px;resize:vertical}
+    button{border:0;border-radius:13px;padding:11px 13px;background:var(--dark);color:#fff;font-weight:850;cursor:pointer;white-space:nowrap;}
+    button:active{transform:scale(.98)}
+    .btn2{background:#e5e7eb;color:#111827}.ok{background:var(--green)}.danger{background:var(--red)}.warn{background:var(--amber);color:#111827}.blue{background:var(--blue)}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 12px}.brand{font-weight:950;font-size:21px;letter-spacing:-.5px}.sub{font-size:12px;color:var(--muted);font-weight:800}.pill{background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}.pill.red{background:#fee2e2;color:#991b1b}.pill.green{background:#dcfce7;color:#166534}
+    .searchbar{display:grid;grid-template-columns:1fr 150px 110px;gap:8px;margin-bottom:8px}.actions{display:flex;gap:8px;overflow:auto;padding:4px 0 10px}.backup{background:#fff7ed;border:1px solid #fed7aa;border-radius:var(--radius);padding:10px;margin:6px 0 10px;color:#9a3412;font-weight:800;font-size:13px}.backup.okbackup{background:#ecfdf5;border-color:#bbf7d0;color:#166534}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0 12px}.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:10px;box-shadow:var(--shadow)}.stat span{display:block;color:var(--muted);font-size:11px;font-weight:900;text-transform:uppercase}.stat b{font-size:20px;line-height:1.25}
+    .tabs{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;gap:5px;overflow:auto;padding:8px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-right));z-index:30}.tabs button{flex:1;min-width:96px;background:#e5e7eb;color:#111827;padding:10px 8px;font-size:13px!important}.tabs button.active{background:var(--dark);color:#fff}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;margin:10px 0;box-shadow:var(--shadow)}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0}.sectionTitle h3{margin:0;font-size:17px}.mini{font-size:12px;color:var(--muted);font-weight:700}.empty{text-align:center;color:var(--muted);padding:22px 12px;background:#fff;border:1px dashed #cbd5e1;border-radius:18px;margin:10px 0}.hide{display:none!important}
+    .tableWrap{overflow:auto;border-radius:16px;border:1px solid var(--line);background:#fff}.table{width:100%;border-collapse:collapse;min-width:760px}.table th,.table td{padding:10px;border-bottom:1px solid #eef2f7;text-align:left;font-size:13px!important;vertical-align:top}.table th{background:#0f172a;color:#fff;font-weight:900;text-transform:uppercase;letter-spacing:.2px}.table tr.low td{background:#fff7ed}.rowActions{display:flex;gap:6px;flex-wrap:wrap}.rowActions button{font-size:12px!important;padding:8px 9px}.qty{font-size:18px;font-weight:950}.listItem{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid #eef2f7;padding:10px 0}.listItem:last-child{border-bottom:0}.right{text-align:right}.nowrap{white-space:nowrap}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}.label{font-size:13px;font-weight:900;margin:8px 0 5px}.modal{position:fixed;inset:0;background:rgba(15,23,42,.48);display:flex;align-items:flex-end;z-index:60;padding-top:36px}.sheet{width:100%;max-height:92vh;overflow:auto;background:#fff;border-radius:24px 24px 0 0;padding:14px;box-shadow:0 -10px 35px rgba(0,0,0,.18)}.sheetHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}.sheet h2{margin:0;font-size:20px}.toast{position:fixed;left:14px;right:14px;bottom:86px;background:#0f172a;color:#fff;border-radius:15px;padding:13px 16px;text-align:center;font-weight:900;z-index:90;box-shadow:var(--shadow)}.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:900;background:#eef2ff;color:#3730a3}.badge.pending{background:#fee2e2;color:#991b1b}.badge.paid{background:#dcfce7;color:#166534}
+    @media(max-width:640px){body{padding:10px;padding-bottom:96px}.searchbar{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.brand{font-size:19px}.top{align-items:flex-start}.table{min-width:700px}.hideMobile{display:none}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div><div class="brand">Inventario Displays Pro</div><div class="sub">local · guardado en este dispositivo</div></div>
+    <div class="pill green">NO ZOOM</div>
+  </header>
+
+  <div class="searchbar">
+    <input id="q" placeholder="BUSCAR" autocomplete="off" autocapitalize="characters">
+    <select id="brandFilter"><option value="">Marca Todas</option></select>
+    <select id="stockFilter"><option value="">Stock</option><option value="low">Stock bajo</option><option value="zero">Stock 0</option><option value="ok">Con stock</option></select>
+  </div>
+  <div class="actions">
+    <button id="newBtn">＋ Nuevo</button><button class="btn2" id="exportBtn">⇩ Exportar</button><button class="btn2" id="importBtn">⇧ Importar</button><button class="btn2" id="restoreBtn">Restaurar base</button><button class="danger" id="wipeBtn">Vaciar inventario</button><button class="btn2" id="clearSearch">Limpiar búsqueda</button>
+  </div>
+  <input type="file" id="fileInput" accept="application/json" hidden>
+  <div id="backupMsg" class="backup">Aún no has exportado un respaldo.</div>
+
+  <div class="stats">
+    <div class="stat"><span>Registros</span><b id="sReg">0</b></div><div class="stat"><span>Unidades</span><b id="sUnits">0</b></div><div class="stat"><span>Valor</span><b id="sValue">$0</b></div><div class="stat"><span>Ventas</span><b id="sSales">0</b></div><div class="stat"><span>Fallas</span><b id="sFail">0</b></div><div class="stat"><span>Interno</span><b id="sInternal">0</b></div><div class="stat"><span>Por pedir</span><b id="sNeed">0</b></div><div class="stat"><span>Pendiente</span><b id="sPending">$0</b></div>
+  </div>
+
+  <main>
+    <section id="viewInv"><div class="empty" id="hint">Escribe para buscar un modelo.</div><div id="invWrap"></div></section>
+    <section id="viewSales" class="hide"><div class="sectionTitle"><h3>Ventas por cobrar <span id="pendingCount" class="badge pending">0</span></h3><button class="btn2" onclick="clearSection('sales')">Limpiar</button></div><div id="salesList"></div></section>
+    <section id="viewFail" class="hide"><div class="sectionTitle"><h3>Garantías / fallas</h3><button class="btn2" onclick="clearSection('fails')">Limpiar</button></div><div id="failList"></div></section>
+    <section id="viewInternal" class="hide"><div class="sectionTitle"><h3>Uso interno</h3><button class="btn2" onclick="clearSection('internal')">Limpiar</button></div><div id="internalList"></div></section>
+    <section id="viewLog" class="hide"><div class="sectionTitle"><h3>Bitácora general</h3><button class="btn2" onclick="clearSection('log')">Limpiar</button></div><div id="logList"></div></section>
+    <section id="viewNeed" class="hide"><div class="card"><div class="sectionTitle"><h3>Pantallas por pedir</h3><button class="btn2" onclick="copyNeed()">Copiar lista</button></div><div class="mini">Aquí salen automáticamente los modelos con stock en 1 o 0.</div></div><div id="needList"></div></section>
+  </main>
+
+  <nav class="tabs">
+    <button class="active" data-tab="Inv">Inventario</button><button data-tab="Sales">Ventas</button><button data-tab="Fail">Garantías</button><button data-tab="Internal">Uso interno</button><button data-tab="Log">Bitácora</button><button data-tab="Need">Por pedir</button>
+  </nav>
+
+  <div class="modal hide" id="itemModal"><div class="sheet"><div class="sheetHead"><h2 id="itemTitle">Nuevo artículo</h2><button class="btn2" onclick="closeItem()">Cerrar</button></div><div class="grid"><div><div class="label">Marca</div><select id="fBrand"></select></div><div><div class="label">Modelo</div><input id="fModel" autocomplete="off"></div><div><div class="label">Calidad</div><input id="fQuality" placeholder="OLED / INCELL / ORIGINAL" autocomplete="off"></div><div><div class="label">Stock</div><input id="fStock" type="number" inputmode="numeric" min="0"></div><div><div class="label">Precio</div><input id="fPrice" type="number" inputmode="decimal" step="0.01" min="0"></div><div><div class="label">Fecha</div><input id="fDate" type="date"></div><div class="full"><div class="label">Nota</div><textarea id="fNote" autocomplete="off"></textarea><div class="mini">Se guarda en tu iPhone con localStorage.</div></div><button class="ok full" onclick="saveItem()">Guardar</button></div></div></div>
+
+  <div class="modal hide" id="actModal"><div class="sheet"><div class="sheetHead"><h2 id="actTitle">Acción</h2><button class="btn2" onclick="closeAct()">Cerrar</button></div><div class="grid"><div><div class="label">Cantidad</div><input id="aQty" type="number" inputmode="numeric" min="1" value="1"></div><div><div class="label">Fecha y hora</div><input id="aDate" type="datetime-local"></div><div class="saleOnly"><div class="label">Cliente</div><input id="aClient" autocomplete="off"></div><div class="saleOnly"><div class="label">Precio venta</div><input id="aSalePrice" type="number" inputmode="decimal" step="0.01" min="0"></div><div class="failOnly hide"><div class="label">Falla</div><input id="aFail" autocomplete="off"></div><div class="failOnly hide"><div class="label">Cliente</div><input id="aFailClient" autocomplete="off"></div><div class="internalOnly hide"><div class="label">Motivo</div><select id="aReason"><option>USO EN TALLER</option><option>USO PERSONAL</option><option>PRUEBA</option><option>MUESTRA</option><option>OTRO</option></select></div><div class="internalOnly hide"><div class="label">Equipo / trabajo</div><input id="aJob" autocomplete="off"></div><div class="adjustOnly hide"><div class="label">Tipo</div><select id="aAdjustType"><option value="add">SUMAR STOCK</option><option value="sub">RESTAR STOCK</option></select></div><div class="full"><div class="label">Nota</div><textarea id="aNote" autocomplete="off"></textarea><div class="mini">Confirma para actualizar el stock.</div></div><button class="ok full" onclick="confirmAction()">Confirmar</button></div></div></div>
+
+  <div class="modal hide" id="payModal"><div class="sheet"><div class="sheetHead"><h2>Marcar cobro</h2><button class="btn2" onclick="closePay()">Cerrar</button></div><div class="grid"><div class="full"><div class="label">Nota de pago</div><textarea id="payNote" placeholder="EFECTIVO / TRANSFERENCIA / TARJETA"></textarea><div class="mini">Esto saca la venta de pendientes.</div></div><button class="ok full" onclick="confirmPaid()">Marcar pagado</button></div></div></div>
+
+<script>
+(function(){
+  'use strict';
+  const KEY='inventario_displays_pro_clean_v4';
+  const OLD_KEYS=['inventario_displays_pro_nozoom_v1','inventario_displays_pro_v1','inventarioDisplaysPro'];
+  const BRANDS=['APPLE','SAMSUNG','XIAOMI','REDMI','POCO','OPPO','REALME','VIVO','HONOR','HUAWEI','MOTOROLA','INFINIX','TECNO','ZTE','NUBIA','LENOVO','LG','NOKIA','ALCATEL','OTRO'];
+  const BASE_ITEMS=[];
+  let db=load(); let editId=null; let action={id:null,type:null}; let payId=null;
+  const $=id=>document.getElementById(id);
+  const $$=sel=>Array.from(document.querySelectorAll(sel));
+
+  function emptyDB(){return{items:[],sales:[],fails:[],internal:[],log:[],meta:{lastExport:null}}}
+  function normalize(raw){const base=emptyDB(); const j=raw&&typeof raw==='object'?raw:{}; return {items:Array.isArray(j.items)?j.items:[],sales:Array.isArray(j.sales)?j.sales:[],fails:Array.isArray(j.fails)?j.fails:[],internal:Array.isArray(j.internal)?j.internal:[],log:Array.isArray(j.log)?j.log:[],meta:{...base.meta,...(j.meta||{})}}}
+  function load(){try{let data=localStorage.getItem(KEY); if(!data){for(const k of OLD_KEYS){if(localStorage.getItem(k)){data=localStorage.getItem(k);break}}} return normalize(JSON.parse(data||'null'))}catch(e){return emptyDB()}}
+  function persist(){localStorage.setItem(KEY,JSON.stringify(db)); render()}
+  function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,9)}
+  function up(v){return (v||'').toString().toUpperCase().trim()}
+  function money(n){return '$'+(Number(n)||0).toFixed(2)}
+  function today(){return new Date().toISOString().slice(0,10)}
+  function nowLocal(){const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,16)}
+  function esc(v){return (v??'').toString().replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+  function toast(msg){const old=$$('.toast');old.forEach(x=>x.remove());const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),1800)}
+  function log(msg){db.log.unshift({id:uid(),date:nowLocal(),msg:up(msg)});db.log=db.log.slice(0,500)}
+
+  function fillBrands(){[$('brandFilter'),$('fBrand')].forEach((s,i)=>{s.innerHTML=(i?'<option value="">SELECCIONA</option>':'<option value="">Marca Todas</option>')+BRANDS.map(b=>`<option value="${b}">${b}</option>`).join('')})}
+  function bind(){
+    $('newBtn').onclick=()=>openItem(); $('clearSearch').onclick=()=>{$('q').value='';$('brandFilter').value='';$('stockFilter').value='';render()};
+    $('q').addEventListener('input',e=>{e.target.value=up(e.target.value);render()}); $('brandFilter').onchange=render; $('stockFilter').onchange=render;
+    $('exportBtn').onclick=exportJSON; $('importBtn').onclick=()=>$('fileInput').click(); $('fileInput').onchange=importJSON; $('restoreBtn').onclick=restoreBase; $('wipeBtn').onclick=wipeAll;
+    $$('.tabs button').forEach(btn=>btn.onclick=()=>switchTab(btn.dataset.tab));
+    document.addEventListener('input',e=>{if(e.target.matches('input:not([type=number]):not([type=date]):not([type=datetime-local]), textarea')){const s=e.target.selectionStart; e.target.value=up(e.target.value); try{e.target.setSelectionRange(s,s)}catch(_){}}});
+    preventZoom();
+  }
+  function preventZoom(){
+    document.addEventListener('gesturestart',e=>e.preventDefault(),{passive:false});
+    document.addEventListener('gesturechange',e=>e.preventDefault(),{passive:false});
+    document.addEventListener('gestureend',e=>e.preventDefault(),{passive:false});
+    let lastTouch=0; document.addEventListener('touchend',e=>{const now=Date.now(); if(now-lastTouch<350){e.preventDefault()} lastTouch=now},{passive:false});
+    document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault()},{passive:false});
+  }
+  function switchTab(tab){$$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab)); ['Inv','Sales','Fail','Internal','Log','Need'].forEach(t=>$('view'+t).classList.toggle('hide',t!==tab)); render()}
+
+  window.closeItem=()=>{$('itemModal').classList.add('hide')};
+  window.closeAct=()=>{$('actModal').classList.add('hide')};
+  window.closePay=()=>{$('payModal').classList.add('hide')};
+
+  window.openItem=function(id){
+    const item=typeof id==='string'?db.items.find(x=>x.id===id):null; editId=item?item.id:null;
+    $('itemTitle').textContent=item?'Editar artículo':'Nuevo artículo'; $('fBrand').value=item?.brand||''; $('fModel').value=item?.model||''; $('fQuality').value=item?.quality||''; $('fStock').value=item?.stock??0; $('fPrice').value=item?.price??''; $('fDate').value=item?.date||today(); $('fNote').value=item?.note||''; $('itemModal').classList.remove('hide'); setTimeout(()=>$('fBrand').focus(),60);
+  };
+  window.saveItem=function(){
+    const item={id:editId||uid(),brand:up($('fBrand').value)||'OTRO',model:up($('fModel').value),quality:up($('fQuality').value),stock:Math.max(0,Number($('fStock').value)||0),price:Math.max(0,Number($('fPrice').value)||0),date:$('fDate').value||today(),note:up($('fNote').value)};
+    if(!item.model){toast('Falta el modelo');return} const idx=db.items.findIndex(x=>x.id===item.id); if(idx>=0){db.items[idx]=item;log('EDITADO '+item.brand+' '+item.model)}else{db.items.unshift(item);log('CREADO '+item.brand+' '+item.model)} closeItem(); persist(); toast('Guardado');
+  };
+  window.deleteItem=function(id){const item=db.items.find(x=>x.id===id); if(item&&confirm('¿Eliminar '+item.model+'?')){db.items=db.items.filter(x=>x.id!==id); log('ELIMINADO '+item.model); persist()}};
+
+  window.openAct=function(id,type){
+    const item=db.items.find(x=>x.id===id); if(!item)return; action={id,type}; $('actTitle').textContent=(type==='sale'?'Venta':type==='fail'?'Garantía / falla':type==='internal'?'Uso interno':'Ajustar stock')+' - '+item.model;
+    $('aQty').value=1; $('aDate').value=nowLocal(); ['aClient','aSalePrice','aFail','aFailClient','aJob','aNote'].forEach(id=>$(id).value=''); $('aReason').value='USO EN TALLER'; $('aAdjustType').value='add';
+    ['saleOnly','failOnly','internalOnly','adjustOnly'].forEach(c=>$$('.'+c).forEach(e=>e.classList.add('hide'))); const map={sale:'saleOnly',fail:'failOnly',internal:'internalOnly',adjust:'adjustOnly'}; $$('.'+map[type]).forEach(e=>e.classList.remove('hide'));
+    $('actModal').classList.remove('hide');
+  };
+  window.confirmAction=function(){
+    const item=db.items.find(x=>x.id===action.id); if(!item)return; const qty=Math.max(1,Number($('aQty').value)||1); const base={id:uid(),itemId:item.id,brand:item.brand,model:item.model,quality:item.quality,qty,date:$('aDate').value||nowLocal(),note:up($('aNote').value)};
+    if(action.type==='adjust'){const isAdd=$('aAdjustType').value==='add'; item.stock=Math.max(0,Number(item.stock||0)+(isAdd?qty:-qty)); log((isAdd?'SUMADO ':'RESTADO ')+qty+' '+item.model); closeAct(); persist(); toast('Stock actualizado'); return}
+    if(qty>Number(item.stock||0)&&!confirm('La cantidad supera el stock. ¿Continuar?'))return; item.stock=Math.max(0,Number(item.stock||0)-qty);
+    if(action.type==='sale'){db.sales.unshift({...base,client:up($('aClient').value),price:Number($('aSalePrice').value)||0,paid:false,payNote:''}); log('VENTA '+qty+' '+item.model)}
+    if(action.type==='fail'){db.fails.unshift({...base,fail:up($('aFail').value),client:up($('aFailClient').value)}); log('FALLA '+qty+' '+item.model)}
+    if(action.type==='internal'){db.internal.unshift({...base,reason:up($('aReason').value),job:up($('aJob').value)}); log('USO INTERNO '+qty+' '+item.model)}
+    closeAct(); persist(); toast('Stock descontado');
+  };
+  window.openPay=function(id){payId=id; $('payNote').value=''; $('payModal').classList.remove('hide')};
+  window.confirmPaid=function(){const s=db.sales.find(x=>x.id===payId); if(s){s.paid=true;s.paidDate=nowLocal();s.payNote=up($('payNote').value);log('VENTA PAGADA '+s.model);closePay();persist();toast('Venta pagada')}};
+  window.deleteRecord=function(kind,id){if(!confirm('¿Eliminar registro?'))return; db[kind]=db[kind].filter(x=>x.id!==id); log('REGISTRO ELIMINADO '+kind); persist()};
+  window.clearSection=function(kind){if(!confirm('¿Limpiar esta sección?'))return; db[kind]=[]; log('SECCIÓN LIMPIADA '+kind); persist()};
+  window.copyNeed=function(){const txt=needItems().map(x=>`${x.brand} ${x.model} - ${x.quality||'-'} - STOCK ${x.stock}`).join('\n'); if(!txt){toast('No hay lista por pedir');return} navigator.clipboard?.writeText(txt).then(()=>toast('Lista copiada')).catch(()=>toast('Copia manual no disponible'))};
+
+  function wipeAll(){if(confirm('¿Vaciar TODO el inventario?')){db=emptyDB();persist();toast('Inventario vacío')}}
+  function restoreBase(){if(confirm('Esto restaurará una base limpia y mantendrá tus registros actuales solo si no tienes inventario. ¿Continuar?')){if(db.items.length===0){db.items=BASE_ITEMS.slice();log('BASE RESTAURADA')}else{toast('Ya tienes inventario; no se sobreescribió')}persist()}}
+  function exportJSON(){db.meta.lastExport=new Date().toISOString(); const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='inventario-displays-respaldo-'+today()+'.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(a.href); persist(); toast('Respaldo exportado')}
+  function importJSON(e){const f=e.target.files&&e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{try{const imported=normalize(JSON.parse(r.result)); db=imported; log('RESPALDO IMPORTADO '+f.name); persist(); toast('Importado correctamente')}catch(err){toast('JSON inválido')}}; r.readAsText(f); e.target.value=''}
+
+  function filteredItems(){const q=up($('q').value), brand=$('brandFilter').value, stock=$('stockFilter').value; return db.items.filter(x=>{const s=Number(x.stock)||0; return (!q||(x.brand+' '+x.model+' '+x.quality+' '+x.note).includes(q))&&(!brand||x.brand===brand)&&(!stock||(stock==='low'?s<=1:stock==='zero'?s===0:stock==='ok'?s>0:true))}).sort((a,b)=>a.brand.localeCompare(b.brand)||a.model.localeCompare(b.model))}
+  function needItems(){return db.items.filter(x=>(Number(x.stock)||0)<=1).sort((a,b)=>a.brand.localeCompare(b.brand)||a.model.localeCompare(b.model))}
+  function renderInventory(){const q=up($('q').value), hasFilter=q||$('brandFilter').value||$('stockFilter').value; const arr=filteredItems(); $('hint').classList.toggle('hide',!!hasFilter); if(!hasFilter){$('invWrap').innerHTML='';return} if(!arr.length){$('invWrap').innerHTML='<div class="empty">No hay coincidencias.</div>';return} $('invWrap').innerHTML=`<div class="tableWrap"><table class="table"><thead><tr><th>Marca</th><th>Modelo</th><th>Calidad</th><th>Stock</th><th>Precio</th><th>Acciones</th></tr></thead><tbody>${arr.map(x=>`<tr class="${Number(x.stock)<=1?'low':''}"><td>${esc(x.brand)}</td><td><b>${esc(x.model)}</b><div class="mini">${esc(x.note||'')}</div></td><td>${esc(x.quality||'-')}</td><td><span class="qty">${Number(x.stock)||0}</span></td><td>${money(x.price)}</td><td><div class="rowActions"><button class="blue" onclick="openAct('${x.id}','sale')">Venta</button><button class="warn" onclick="openAct('${x.id}','fail')">Falla</button><button class="btn2" onclick="openAct('${x.id}','internal')">Interno</button><button class="btn2" onclick="openAct('${x.id}','adjust')">+ / -</button><button class="btn2" onclick="openItem('${x.id}')">Editar</button><button class="danger" onclick="deleteItem('${x.id}')">Borrar</button></div></td></tr>`).join('')}</tbody></table></div>`}
+  function card(title, meta, body, actions=''){return `<div class="card"><div class="listItem"><div><b>${title}</b><div class="mini">${meta}</div></div>${actions?`<div class="right">${actions}</div>`:''}</div>${body?`<div>${body}</div>`:''}</div>`}
+  function renderSales(){const pending=db.sales.filter(x=>!x.paid).length; $('pendingCount').textContent=pending; $('salesList').innerHTML=db.sales.length?db.sales.map(x=>card(`${esc(x.brand)} ${esc(x.model)}`,`${esc(x.date)} · CANT: ${x.qty} · ${esc(x.quality||'-')}`,`<p>CLIENTE: ${esc(x.client||'-')}<br>VENTA: <b>${money(x.price)}</b> · ${x.paid?'<span class="badge paid">PAGADO</span>':'<span class="badge pending">PENDIENTE</span>'}${x.payNote?`<br>NOTA PAGO: ${esc(x.payNote)}`:''}${x.note?`<br>NOTA: ${esc(x.note)}`:''}</p>`,`${!x.paid?`<button class="ok" onclick="openPay('${x.id}')">Marcar cobro</button>`:''}<button class="danger" onclick="deleteRecord('sales','${x.id}')">Borrar</button>`)).join(''):'<div class="empty">No hay ventas registradas.</div>'}
+  function renderFails(){ $('failList').innerHTML=db.fails.length?db.fails.map(x=>card(`${esc(x.brand)} ${esc(x.model)}`,`${esc(x.date)} · CANT: ${x.qty}`,`<p>FALLA: ${esc(x.fail||'-')}<br>CLIENTE: ${esc(x.client||'-')}${x.note?`<br>NOTA: ${esc(x.note)}`:''}</p>`,`<button class="danger" onclick="deleteRecord('fails','${x.id}')">Borrar</button>`)).join(''):'<div class="empty">Sin garantías / fallas.</div>'}
+  function renderInternal(){ $('internalList').innerHTML=db.internal.length?db.internal.map(x=>card(`${esc(x.brand)} ${esc(x.model)}`,`${esc(x.date)} · CANT: ${x.qty}`,`<p>MOTIVO: ${esc(x.reason||'-')}<br>EQUIPO / TRABAJO: ${esc(x.job||'-')}${x.note?`<br>NOTA: ${esc(x.note)}`:''}</p>`,`<button class="danger" onclick="deleteRecord('internal','${x.id}')">Borrar</button>`)).join(''):'<div class="empty">Sin uso interno.</div>'}
+  function renderLog(){ $('logList').innerHTML=db.log.length?`<div class="card">${db.log.map(x=>`<div class="listItem"><span>${esc(x.msg)}</span><span class="mini nowrap">${esc(x.date)}</span></div>`).join('')}</div>`:'<div class="empty">Sin bitácora.</div>'}
+  function renderNeed(){const need=needItems(); $('needList').innerHTML=need.length?need.map(x=>card(`${esc(x.brand)} ${esc(x.model)}`,`STOCK: ${x.stock} · ${esc(x.quality||'-')}`,`${x.note?`<p>${esc(x.note)}</p>`:''}`,`<button class="btn2" onclick="openItem('${x.id}')">Editar</button>`)).join(''):'<div class="empty">No hay pantallas urgentes por pedir.</div>'}
+  function renderBackup(){const el=$('backupMsg'); if(db.meta.lastExport){el.textContent='Último respaldo exportado: '+new Date(db.meta.lastExport).toLocaleString(); el.classList.add('okbackup')}else{el.textContent='Aún no has exportado un respaldo.'; el.classList.remove('okbackup')}}
+  function renderStats(){const units=db.items.reduce((a,x)=>a+(Number(x.stock)||0),0), value=db.items.reduce((a,x)=>a+(Number(x.stock)||0)*(Number(x.price)||0),0), pendingMoney=db.sales.filter(x=>!x.paid).reduce((a,x)=>a+(Number(x.price)||0),0); $('sReg').textContent=db.items.length; $('sUnits').textContent=units; $('sValue').textContent=money(value); $('sSales').textContent=db.sales.length; $('sFail').textContent=db.fails.length; $('sInternal').textContent=db.internal.length; $('sNeed').textContent=needItems().length; $('sPending').textContent=money(pendingMoney)}
+  function render(){renderBackup();renderStats();renderInventory();renderSales();renderFails();renderInternal();renderLog();renderNeed()}
+  fillBrands(); bind(); render();
+})();
+</script>
+</body>
+</html>

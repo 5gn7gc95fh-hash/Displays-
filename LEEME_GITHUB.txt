@@ -1,0 +1,15 @@
+LISTO PARA GITHUB PAGES
+
+1. Descomprime este ZIP.
+2. Sube los archivos sueltos al repositorio.
+3. Activa GitHub Pages desde Settings > Pages.
+4. Usa branch main y carpeta /root.
+
+ARCHIVOS IMPORTANTES:
+- index.html
+- logo.png
+- manifest.webmanifest
+- icon.svg
+- .nojekyll
+
+El logo incluido dice exactamente: Inventario de Displays.
