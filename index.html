@@ -39,6 +39,30 @@
     .tabs{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;gap:5px;overflow:auto;padding:8px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-right));z-index:30}.tabs button{flex:1;min-width:96px;background:#e5e7eb;color:#111827;padding:10px 8px;font-size:13px!important}.tabs button.active{background:var(--dark);color:#fff}
     .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;margin:10px 0;box-shadow:var(--shadow)}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0}.sectionTitle h3{margin:0;font-size:17px}.mini{font-size:12px;color:var(--muted);font-weight:700}.empty{text-align:center;color:var(--muted);padding:22px 12px;background:#fff;border:1px dashed #cbd5e1;border-radius:18px;margin:10px 0}.hide{display:none!important}
     .tableWrap{overflow:auto;border-radius:16px;border:1px solid var(--line);background:#fff}.table{width:100%;border-collapse:collapse;min-width:760px}.table th,.table td{padding:10px;border-bottom:1px solid #eef2f7;text-align:left;font-size:13px!important;vertical-align:top}.table th{background:#0f172a;color:#fff;font-weight:900;text-transform:uppercase;letter-spacing:.2px}.table tr.low td{background:#fff7ed}.rowActions{display:flex;gap:6px;flex-wrap:wrap}.rowActions button{font-size:12px!important;padding:8px 9px}.qty{font-size:18px;font-weight:950}.listItem{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid #eef2f7;padding:10px 0}.listItem:last-child{border-bottom:0}.right{text-align:right}.nowrap{white-space:nowrap}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}.label{font-size:13px;font-weight:900;margin:8px 0 5px}.modal{position:fixed;inset:0;background:rgba(15,23,42,.48);display:flex;align-items:flex-end;z-index:60;padding-top:36px}.sheet{width:100%;max-height:92vh;overflow:auto;background:#fff;border-radius:24px 24px 0 0;padding:14px;box-shadow:0 -10px 35px rgba(0,0,0,.18)}.sheetHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}.sheet h2{margin:0;font-size:20px}.toast{position:fixed;left:14px;right:14px;bottom:86px;background:#0f172a;color:#fff;border-radius:15px;padding:13px 16px;text-align:center;font-weight:900;z-index:90;box-shadow:var(--shadow)}.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:900;background:#eef2ff;color:#3730a3}.badge.pending{background:#fee2e2;color:#991b1b}.badge.paid{background:#dcfce7;color:#166534}
+
+    .fileLabel{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:13px;
+      padding:11px 13px;
+      font-size:16px!important;
+      font-weight:850;
+      cursor:pointer;
+      background:#e5e7eb;
+      color:#111827;
+      white-space:nowrap;
+      user-select:none;
+    }
+    .fileInput{
+      position:absolute;
+      left:-9999px;
+      width:1px;
+      height:1px;
+      opacity:.01;
+      pointer-events:none;
+    }
+
     @media(max-width:640px){body{padding:10px;padding-bottom:96px}.searchbar{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.brand{font-size:19px}.top{align-items:flex-start}.table{min-width:700px}.hideMobile{display:none}}
   </style>
 </head>
@@ -54,10 +78,10 @@
     <select id="stockFilter"><option value="">Stock</option><option value="low">Stock bajo</option><option value="zero">Stock 0</option><option value="ok">Con stock</option></select>
   </div>
   <div class="actions">
-    <button id="newBtn">＋ Nuevo</button><button class="btn2" id="exportBtn">⇩ Exportar</button><button class="btn2" id="importBtn">⇧ Importar</button><button class="btn2" id="restoreBtn">Restaurar base</button><button class="danger" id="wipeBtn">Vaciar inventario</button><button class="btn2" id="clearSearch">Limpiar búsqueda</button>
+    <button id="newBtn">＋ Nuevo</button><button class="btn2" id="exportBtn">⇩ Exportar</button><label class="btn2 fileLabel" for="fileInput">⇧ Importar JSON</label><button class="btn2" id="restoreBtn">Restaurar base</button><button class="danger" id="wipeBtn">Vaciar inventario</button><button class="btn2" id="clearSearch">Limpiar búsqueda</button>
   </div>
-  <input type="file" id="fileInput" accept="application/json" hidden>
-  <div id="backupMsg" class="backup">Aún no has exportado un respaldo.</div>
+  <input type="file" id="fileInput" accept=".json,application/json,text/plain" class="fileInput">
+  <div id="backupMsg" class="backup">Aún no has exportado un respaldo.</div><div class="mini" style="margin:4px 0 10px">Para importar: toca <b>Importar JSON</b> y selecciona tu respaldo .json desde Archivos.</div>
 
   <div class="stats">
     <div class="stat"><span>Registros</span><b id="sReg">0</b></div><div class="stat"><span>Unidades</span><b id="sUnits">0</b></div><div class="stat"><span>Valor</span><b id="sValue">$0</b></div><div class="stat"><span>Ventas</span><b id="sSales">0</b></div><div class="stat"><span>Fallas</span><b id="sFail">0</b></div><div class="stat"><span>Interno</span><b id="sInternal">0</b></div><div class="stat"><span>Por pedir</span><b id="sNeed">0</b></div><div class="stat"><span>Pendiente</span><b id="sPending">$0</b></div>
@@ -94,7 +118,48 @@
   const $$=sel=>Array.from(document.querySelectorAll(sel));
 
   function emptyDB(){return{items:[],sales:[],fails:[],internal:[],log:[],meta:{lastExport:null}}}
-  function normalize(raw){const base=emptyDB(); const j=raw&&typeof raw==='object'?raw:{}; return {items:Array.isArray(j.items)?j.items:[],sales:Array.isArray(j.sales)?j.sales:[],fails:Array.isArray(j.fails)?j.fails:[],internal:Array.isArray(j.internal)?j.internal:[],log:Array.isArray(j.log)?j.log:[],meta:{...base.meta,...(j.meta||{})}}}
+  function normalize(raw){
+    const base=emptyDB();
+    let j=raw;
+
+    // Soporta respaldos tipo array: [articulos]
+    if(Array.isArray(j)) j={items:j};
+
+    // Soporta respaldos anidados: {data:{...}} o {db:{...}}
+    if(j&&typeof j==='object'&&!Array.isArray(j)){
+      if(j.data&&typeof j.data==='object') j=j.data;
+      if(j.db&&typeof j.db==='object') j=j.db;
+    }else{
+      j={};
+    }
+
+    const pick=(...names)=>{
+      for(const n of names){
+        if(Array.isArray(j[n])) return j[n];
+      }
+      return [];
+    };
+
+    const cleanItems=pick('items','inventory','inventario','productos','displays','stock').map(x=>({
+      id:x.id||uid(),
+      brand:up(x.brand||x.marca||x.MARCA||''),
+      model:up(x.model||x.modelo||x.MODELO||x.name||x.nombre||''),
+      quality:up(x.quality||x.calidad||x.tipo||''),
+      stock:Number(x.stock??x.cantidad??x.qty??x.unidades??0)||0,
+      price:Number(x.price??x.precio??x.valor??0)||0,
+      date:x.date||x.fecha||today(),
+      note:up(x.note||x.detalle||x.detalles||x.observacion||x.observación||'')
+    })).filter(x=>x.model||x.brand);
+
+    return {
+      items:cleanItems,
+      sales:pick('sales','ventas'),
+      fails:pick('fails','fallas','garantias','garantías'),
+      internal:pick('internal','interno','usoInterno','uso_interno'),
+      log:pick('log','bitacora','bitácora','historial'),
+      meta:{...base.meta,...(j.meta||{})}
+    }
+  }
   function load(){try{let data=localStorage.getItem(KEY); if(!data){for(const k of OLD_KEYS){if(localStorage.getItem(k)){data=localStorage.getItem(k);break}}} return normalize(JSON.parse(data||'null'))}catch(e){return emptyDB()}}
   function persist(){localStorage.setItem(KEY,JSON.stringify(db)); render()}
   function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,9)}
@@ -110,7 +175,7 @@
   function bind(){
     $('newBtn').onclick=()=>openItem(); $('clearSearch').onclick=()=>{$('q').value='';$('brandFilter').value='';$('stockFilter').value='';render()};
     $('q').addEventListener('input',e=>{e.target.value=up(e.target.value);render()}); $('brandFilter').onchange=render; $('stockFilter').onchange=render;
-    $('exportBtn').onclick=exportJSON; $('importBtn').onclick=()=>$('fileInput').click(); $('fileInput').onchange=importJSON; $('restoreBtn').onclick=restoreBase; $('wipeBtn').onclick=wipeAll;
+    $('exportBtn').onclick=exportJSON; $('fileInput').addEventListener('change',importJSON); $('restoreBtn').onclick=restoreBase; $('wipeBtn').onclick=wipeAll;
     $$('.tabs button').forEach(btn=>btn.onclick=()=>switchTab(btn.dataset.tab));
     document.addEventListener('input',e=>{if(e.target.matches('input:not([type=number]):not([type=date]):not([type=datetime-local]), textarea')){const s=e.target.selectionStart; e.target.value=up(e.target.value); try{e.target.setSelectionRange(s,s)}catch(_){}}});
     preventZoom();
@@ -162,7 +227,41 @@
   function wipeAll(){if(confirm('¿Vaciar TODO el inventario?')){db=emptyDB();persist();toast('Inventario vacío')}}
   function restoreBase(){if(confirm('Esto restaurará una base limpia y mantendrá tus registros actuales solo si no tienes inventario. ¿Continuar?')){if(db.items.length===0){db.items=BASE_ITEMS.slice();log('BASE RESTAURADA')}else{toast('Ya tienes inventario; no se sobreescribió')}persist()}}
   function exportJSON(){db.meta.lastExport=new Date().toISOString(); const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='inventario-displays-respaldo-'+today()+'.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(a.href); persist(); toast('Respaldo exportado')}
-  function importJSON(e){const f=e.target.files&&e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{try{const imported=normalize(JSON.parse(r.result)); db=imported; log('RESPALDO IMPORTADO '+f.name); persist(); toast('Importado correctamente')}catch(err){toast('JSON inválido')}}; r.readAsText(f); e.target.value=''}
+  function importJSON(e){
+    const f=e.target.files&&e.target.files[0];
+    if(!f){toast('No se seleccionó archivo');return}
+    const r=new FileReader();
+
+    r.onload=()=>{
+      try{
+        const text=String(r.result||'').trim();
+        if(!text){throw new Error('Archivo vacío')}
+        const parsed=JSON.parse(text);
+        const imported=normalize(parsed);
+
+        if(!imported.items.length && !imported.sales.length && !imported.fails.length && !imported.internal.length && !imported.log.length){
+          throw new Error('El JSON no contiene inventario compatible');
+        }
+
+        db=imported;
+        log('RESPALDO IMPORTADO '+f.name);
+        persist();
+        toast('Importado correctamente: '+db.items.length+' artículos');
+      }catch(err){
+        console.error(err);
+        toast('No se pudo importar: '+(err.message||'JSON inválido'));
+      }finally{
+        e.target.value='';
+      }
+    };
+
+    r.onerror=()=>{
+      toast('No se pudo leer el archivo');
+      e.target.value='';
+    };
+
+    r.readAsText(f);
+  }
 
   function filteredItems(){const q=up($('q').value), brand=$('brandFilter').value, stock=$('stockFilter').value; return db.items.filter(x=>{const s=Number(x.stock)||0; return (!q||(x.brand+' '+x.model+' '+x.quality+' '+x.note).includes(q))&&(!brand||x.brand===brand)&&(!stock||(stock==='low'?s<=1:stock==='zero'?s===0:stock==='ok'?s>0:true))}).sort((a,b)=>a.brand.localeCompare(b.brand)||a.model.localeCompare(b.model))}
   function needItems(){return db.items.filter(x=>(Number(x.stock)||0)<=1).sort((a,b)=>a.brand.localeCompare(b.brand)||a.model.localeCompare(b.model))}
