@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "brand": "SAMSUNG",
+      "model": "A12",
+      "quality": "INCELL",
+      "stock": 3,
+      "price": 12.5,
+      "date": "2026-05-26",
+      "note": "EJEMPLO"
+    }
+  ],
+  "sales": [],
+  "fails": [],
+  "internal": [],
+  "log": []
+}

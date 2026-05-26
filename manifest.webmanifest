@@ -2,8 +2,10 @@
   "name": "Inventario de Displays",
   "short_name": "Displays",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "background_color": "#f3f8ff",
   "theme_color": "#061f4a",
   "icons": [
     {
@@ -16,7 +18,7 @@
       "src": "icon.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }

@@ -1,24 +1,25 @@
 # Inventario de Displays
 
-Paquete listo para subir a **GitHub Pages**.
+Versión mejorada para GitHub Pages.
 
-## Incluye
+Funciones:
+- Inventario
+- Ventas
+- Ventas por cobrar
+- Garantías/fallas
+- Uso interno
+- Bitácora
+- Por pedir
+- Exportar respaldo JSON
+- Importar respaldo JSON compatible
+- Bloqueo de zoom en iPhone/Safari
+- Logo y PWA
 
-- `index.html`
-- `logo.png`
-- `manifest.webmanifest`
-- `icon.svg`
-- `.nojekyll`
+## Subir a GitHub Pages
 
-## Cómo subirlo
-
-1. Crea un repositorio nuevo en GitHub.
-2. Sube todos los archivos sueltos de este ZIP.
-3. Ve a `Settings > Pages`.
-4. En `Source`, elige `Deploy from a branch`.
-5. Selecciona `main` y `/root`.
-6. Guarda y espera el enlace de GitHub Pages.
-
-## Nota
-
-El logo principal dice: **Inventario de Displays**.
+1. Descomprime el ZIP.
+2. Sube los archivos sueltos al repositorio.
+3. Ve a Settings > Pages.
+4. Source: Deploy from a branch.
+5. Branch: main / root.
+6. Guarda.
