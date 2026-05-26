@@ -131,9 +131,22 @@ document.addEventListener("compositionend",e=>{
 document.addEventListener("input",e=>{
   const el=e.target;
 
-  // BUSCADOR: no tocar el texto mientras escribes.
-  // Así la barra espaciadora funciona bien en iPhone/Safari.
-  if(el.matches("#search,#brandFilter,#stockFilter")){
+  // BUSCADOR: convertir a MAYÚSCULAS sin romper espacios en iPhone.
+  if(el.matches("#search")){
+    const start=el.selectionStart;
+    const end=el.selectionEnd;
+    const upper=String(el.value||"").toUpperCase();
+
+    if(el.value!==upper){
+      el.value=upper;
+      try{el.setSelectionRange(start,end)}catch(err){}
+    }
+
+    render();
+    return;
+  }
+
+  if(el.matches("#brandFilter,#stockFilter")){
     render();
     return;
   }
