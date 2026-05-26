@@ -68,7 +68,7 @@ textarea{min-height:80px;resize:vertical}
 <div class="app">
 <header class="top">
  <div class="brand"><img src="logo.png" alt="Logo" onerror="this.style.display='none'"><div><h1>Inventario de Displays</h1><small>App local para taller • GitHub Pages</small></div></div>
- <div class="search"><input id="search" placeholder="BUSCAR MARCA O MODELO" autocomplete="off"><select id="brandFilter"><option value="">TODAS LAS MARCAS</option></select><select id="stockFilter"><option value="">TODO STOCK</option><option value="low">STOCK BAJO</option><option value="zero">AGOTADOS</option></select></div>
+ <div class="search"><input id="search" placeholder="Buscar marca o modelo" autocomplete="off"><select id="brandFilter"><option value="">TODAS LAS MARCAS</option></select><select id="stockFilter"><option value="">TODO STOCK</option><option value="low">STOCK BAJO</option><option value="zero">AGOTADOS</option></select></div>
  <div class="stats"><div class="stat"><b id="stItems">0</b><span>Modelos</span></div><div class="stat"><b id="stUnits">0</b><span>Unidades</span></div><div class="stat"><b id="stValue">$0</b><span>Valor</span></div><div class="stat"><b id="stSales">0</b><span>Ventas</span></div><div class="stat"><b id="stDebt">$0</b><span>Por cobrar</span></div><div class="stat"><b id="stLow">0</b><span>Por pedir</span></div></div>
  <div class="actions"><button class="primary" id="btnNew">＋ Nuevo</button><button class="secondary" id="btnExport">⇩ Exportar</button><label class="fileBtn" for="fileInput">⇧ Importar JSON</label><input class="fileInput" id="fileInput" type="file" accept=".json,application/json,text/plain"><button class="secondary" id="btnBase">Restaurar base</button><button class="secondary" id="btnDemo">Demo</button><button class="danger" id="btnWipe">Vaciar</button></div>
  <div class="backup" id="backupMsg">Exporta respaldos frecuentes. Tu información se guarda en este navegador.</div>
@@ -122,7 +122,33 @@ function base(){if(!confirm("Restaurar base de modelos? Conserva registros."))re
 function demo(){[["SAMSUNG","A12","INCELL",3,12.5],["IPHONE","11","INCELL",2,24],["XIAOMI","REDMI NOTE 8","INCELL",1,13]].forEach(([brand,model,quality,stock,price])=>db.items.push({id:uid(),brand,model,quality,stock,price,date:today(),note:"DEMO"}));log("DEMO AGREGADO");save();toast("Demo agregado")}
 function copy(text){navigator.clipboard?navigator.clipboard.writeText(text).then(()=>toast("Copiado")):toast("Copia no disponible")}
 document.addEventListener("click",e=>{let b=e.target.closest("button,label");if(!b)return;if(b.dataset.tab){document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t===b));document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===b.dataset.tab))}if(b.id==="btnNew")openItem();if(b.id==="btnExport")exportJSON();if(b.id==="btnBase")base();if(b.id==="btnDemo")demo();if(b.id==="btnWipe"&&confirm("¿Vaciar todo?")){db=empty();save()}if(b.id==="btnCopyOrder"){let a=sort(db.items.filter(x=>x.stock<=1));copy("PANTALLAS POR PEDIR\\n"+a.map(x=>`- ${x.brand} ${x.model} ${x.quality} | STOCK ${x.stock}`).join("\\n"))}if(b.id==="btnCopyDebt"){let a=db.sales.filter(x=>!x.paid);copy("VENTAS POR COBRAR\\n"+a.map(x=>`- ${x.client||"SIN CLIENTE"} | ${x.itemName} | ${money(x.total??x.price)}`).join("\\n"))}if(b.dataset.close!==undefined)close();if(b.dataset.edit)openItem(b.dataset.edit);if(b.dataset.act)openAction(b.dataset.act,b.dataset.id);if(b.dataset.pay){$("payId").value=b.dataset.pay;$("payNote").value="";open("payModal")}if(b.dataset.del&&confirm("¿Borrar artículo?")){db.items=db.items.filter(x=>x.id!==b.dataset.del);save()}if(b.dataset.delSale&&confirm("¿Borrar venta?")){db.sales=db.sales.filter(x=>x.id!==b.dataset.delSale);save()}if(b.dataset.delRec){let [list,id]=b.dataset.delRec.split(":"),map={failsList:"fails",internalList:"internal",logList:"log"},k=map[list];if(k&&confirm("¿Borrar registro?")){db[k]=db[k].filter(x=>x.id!==id);save()}}if(b.dataset.clear&&confirm("¿Limpiar sección?")){db[b.dataset.clear]=[];save()}})
-document.addEventListener("input",e=>{if(e.target.matches("#search,#brandFilter,#stockFilter"))render();if(e.target.matches("input:not([type=number]):not([type=date]):not([type=datetime-local]),textarea"))e.target.value=up(e.target.value)})
+let composingText=false;
+document.addEventListener("compositionstart",()=>{composingText=true});
+document.addEventListener("compositionend",e=>{
+  composingText=false;
+  if(e.target&&e.target.matches("#search,#brandFilter,#stockFilter"))render();
+});
+document.addEventListener("input",e=>{
+  const el=e.target;
+
+  // BUSCADOR: no tocar el texto mientras escribes.
+  // Así la barra espaciadora funciona bien en iPhone/Safari.
+  if(el.matches("#search,#brandFilter,#stockFilter")){
+    render();
+    return;
+  }
+
+  // FORMULARIOS: mayúsculas sin borrar espacios.
+  if(!composingText&&el.matches("input:not([type=number]):not([type=date]):not([type=datetime-local]):not(#search),textarea")){
+    const start=el.selectionStart;
+    const end=el.selectionEnd;
+    const upper=String(el.value||"").toUpperCase();
+    if(el.value!==upper){
+      el.value=upper;
+      try{el.setSelectionRange(start,end)}catch(err){}
+    }
+  }
+});
 document.querySelectorAll(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)close()});$("fileInput").onchange=importJSON;$("date").value=today();document.addEventListener("gesturestart",e=>e.preventDefault());let last=0;document.addEventListener("touchend",e=>{let n=Date.now();if(n-last<=300)e.preventDefault();last=n},{passive:false});render();
 })();
 </script>
