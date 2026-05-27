@@ -23,3 +23,8 @@ Funciones:
 4. Source: Deploy from a branch.
 5. Branch: main / root.
 6. Guarda.
+
+
+## Respaldo total
+
+El botón **Respaldo total** guarda inventario completo, ventas, garantías/fallas, uso interno, bitácora, metadatos y una copia del almacenamiento local de la app.
