@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#061f4a">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Inventario">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Inventario de Displays</title>
@@ -68,7 +69,7 @@ textarea{min-height:80px;resize:vertical}
 <div class="app">
 <header class="top">
  <div class="brand"><img src="logo.png" alt="Logo" onerror="this.style.display='none'"><div><h1>Inventario de Displays</h1><small>App local para taller • GitHub Pages</small></div></div>
- <div class="search"><input id="search" placeholder="Buscar marca o modelo" autocomplete="off"><select id="brandFilter"><option value="">TODAS LAS MARCAS</option></select><select id="stockFilter"><option value="">TODO STOCK</option><option value="low">STOCK BAJO</option><option value="zero">AGOTADOS</option></select></div>
+ <div class="search"><input id="search" autocapitalize="characters" spellcheck="false" enterkeyhint="search" placeholder="Buscar marca o modelo" autocomplete="off"><select id="brandFilter"><option value="">TODAS LAS MARCAS</option></select><select id="stockFilter"><option value="">TODO STOCK</option><option value="low">STOCK BAJO</option><option value="zero">AGOTADOS</option></select></div>
  <div class="stats"><div class="stat"><b id="stItems">0</b><span>Modelos</span></div><div class="stat"><b id="stUnits">0</b><span>Unidades</span></div><div class="stat"><b id="stValue">$0</b><span>Valor</span></div><div class="stat"><b id="stSales">0</b><span>Ventas</span></div><div class="stat"><b id="stDebt">$0</b><span>Por cobrar</span></div><div class="stat"><b id="stLow">0</b><span>Por pedir</span></div></div>
  <div class="actions"><button class="primary" id="btnNew">＋ Nuevo</button><button class="secondary" id="btnExport">⇩ Respaldo total</button><label class="fileBtn" for="fileInput">⇧ Importar JSON</label><input class="fileInput" id="fileInput" type="file" accept=".json,application/json,text/plain"><button class="secondary" id="btnBase">Restaurar base</button><button class="secondary" id="btnDemo">Demo</button><button class="danger" id="btnWipe">Vaciar</button></div>
  <div class="backup" id="backupMsg">Exporta respaldos frecuentes. Tu información se guarda en este navegador.</div>
@@ -83,11 +84,11 @@ textarea{min-height:80px;resize:vertical}
 <section id="order" class="panel"><div class="card"><div class="cardTitle"><h2>Pantallas por pedir</h2><button class="secondary" id="btnCopyOrder">Copiar</button></div><div id="orderList" class="list"></div></div></section>
 </div>
 
-<div class="modal" id="itemModal"><div class="sheet"><div class="sheetHead"><h2 id="itemTitle">Nuevo artículo</h2><button class="secondary" data-close>✕</button></div><form id="itemForm"><input type="hidden" id="itemId"><div class="form"><div class="field"><label>Marca</label><input id="brand" required placeholder="SAMSUNG"></div><div class="field"><label>Modelo</label><input id="model" required placeholder="A12"></div><div class="field"><label>Calidad</label><input id="quality" placeholder="OLED / INCELL"></div><div class="field"><label>Stock</label><input id="stock" type="number" min="0" inputmode="numeric" value="1"></div><div class="field"><label>Precio compra</label><input id="price" type="number" min="0" step="0.01" inputmode="decimal" value="0"></div><div class="field"><label>Fecha</label><input id="date" type="date"></div><div class="field full"><label>Nota</label><textarea id="note" placeholder="DETALLES"></textarea></div></div><div class="formActions"><button type="button" class="secondary" data-close>Cancelar</button><button class="primary">Guardar</button></div></form></div></div>
+<div class="modal" id="itemModal"><div class="sheet"><div class="sheetHead"><h2 id="itemTitle">Nuevo artículo</h2><button class="secondary" data-close>✕</button></div><form id="itemForm"><input type="hidden" id="itemId"><div class="form"><div class="field"><label>Marca</label><input id="brand" autocapitalize="characters" spellcheck="false" required placeholder="SAMSUNG"></div><div class="field"><label>Modelo</label><input id="model" autocapitalize="characters" spellcheck="false" required placeholder="A12"></div><div class="field"><label>Calidad</label><input id="quality" autocapitalize="characters" spellcheck="false" placeholder="OLED / INCELL"></div><div class="field"><label>Stock</label><input id="stock" type="number" min="0" inputmode="numeric" value="1"></div><div class="field"><label>Precio compra</label><input id="price" type="number" min="0" step="0.01" inputmode="decimal" value="0"></div><div class="field"><label>Fecha</label><input id="date" type="date"></div><div class="field full"><label>Nota</label><textarea id="note" autocapitalize="characters" spellcheck="false" placeholder="DETALLES"></textarea></div></div><div class="formActions"><button type="button" class="secondary" data-close>Cancelar</button><button class="primary">Guardar</button></div></form></div></div>
 
-<div class="modal" id="actionModal"><div class="sheet"><div class="sheetHead"><h2 id="actionTitle">Acción</h2><button class="secondary" data-close>✕</button></div><form id="actionForm"><input type="hidden" id="actionItemId"><input type="hidden" id="actionType"><div class="form"><div class="field"><label>Cantidad</label><input id="actionQty" type="number" min="1" inputmode="numeric" value="1"></div><div class="field"><label>Fecha y hora</label><input id="actionDate" type="datetime-local"></div><div class="field saleOnly"><label>Cliente</label><input id="saleClient"></div><div class="field saleOnly"><label>Precio venta</label><input id="salePrice" type="number" min="0" step="0.01" inputmode="decimal" value="0"></div><div class="field saleOnly"><label>Cobro</label><select id="salePaid"><option value="false">POR COBRAR</option><option value="true">PAGADO</option></select></div><div class="field failOnly"><label>Cliente</label><input id="failClient"></div><div class="field failOnly"><label>Falla</label><input id="failReason"></div><div class="field internalOnly"><label>Motivo</label><select id="internalReason"><option>USO EN TALLER</option><option>USO PERSONAL</option><option>PRUEBA</option><option>OTRO</option></select></div><div class="field internalOnly"><label>Trabajo</label><input id="internalJob"></div><div class="field full"><label>Nota</label><textarea id="actionNote"></textarea></div></div><div class="formActions"><button type="button" class="secondary" data-close>Cancelar</button><button class="primary">Confirmar</button></div></form></div></div>
+<div class="modal" id="actionModal"><div class="sheet"><div class="sheetHead"><h2 id="actionTitle">Acción</h2><button class="secondary" data-close>✕</button></div><form id="actionForm"><input type="hidden" id="actionItemId"><input type="hidden" id="actionType"><div class="form"><div class="field"><label>Cantidad</label><input id="actionQty" type="number" min="1" inputmode="numeric" value="1"></div><div class="field"><label>Fecha y hora</label><input id="actionDate" type="datetime-local"></div><div class="field saleOnly"><label>Cliente</label><input id="saleClient"></div><div class="field saleOnly"><label>Precio venta</label><input id="salePrice" type="number" min="0" step="0.01" inputmode="decimal" value="0"></div><div class="field saleOnly"><label>Cobro</label><select id="salePaid"><option value="false">POR COBRAR</option><option value="true">PAGADO</option></select></div><div class="field failOnly"><label>Cliente</label><input id="failClient"></div><div class="field failOnly"><label>Falla</label><input id="failReason"></div><div class="field internalOnly"><label>Motivo</label><select id="internalReason"><option>USO EN TALLER</option><option>USO PERSONAL</option><option>PRUEBA</option><option>OTRO</option></select></div><div class="field internalOnly"><label>Trabajo</label><input id="internalJob"></div><div class="field full"><label>Nota</label><textarea id="actionNote" autocapitalize="characters" spellcheck="false"></textarea></div></div><div class="formActions"><button type="button" class="secondary" data-close>Cancelar</button><button class="primary">Confirmar</button></div></form></div></div>
 
-<div class="modal" id="payModal"><div class="sheet"><div class="sheetHead"><h2>Marcar cobro</h2><button class="secondary" data-close>✕</button></div><form id="payForm"><input type="hidden" id="payId"><div class="field"><label>Nota de pago</label><textarea id="payNote"></textarea></div><div class="formActions"><button type="button" class="secondary" data-close>Cancelar</button><button class="ok">Marcar pagado</button></div></form></div></div>
+<div class="modal" id="payModal"><div class="sheet"><div class="sheetHead"><h2>Marcar cobro</h2><button class="secondary" data-close>✕</button></div><form id="payForm"><input type="hidden" id="payId"><div class="field"><label>Nota de pago</label><textarea id="payNote" autocapitalize="characters" spellcheck="false"></textarea></div><div class="formActions"><button type="button" class="secondary" data-close>Cancelar</button><button class="ok">Marcar pagado</button></div></form></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -202,46 +203,43 @@ function demo(){[["SAMSUNG","A12","INCELL",3,12.5],["IPHONE","11","INCELL",2,24]
 function copy(text){navigator.clipboard?navigator.clipboard.writeText(text).then(()=>toast("Copiado")):toast("Copia no disponible")}
 document.addEventListener("click",e=>{let b=e.target.closest("button,label");if(!b)return;if(b.dataset.tab){document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t===b));document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===b.dataset.tab))}if(b.id==="btnNew")openItem();if(b.id==="btnExport")exportJSON();if(b.id==="btnBase")base();if(b.id==="btnDemo")demo();if(b.id==="btnWipe"&&confirm("¿Vaciar todo?")){db=empty();save()}if(b.id==="btnCopyOrder"){let a=sort(db.items.filter(x=>x.stock<=1));copy("PANTALLAS POR PEDIR\\n"+a.map(x=>`- ${x.brand} ${x.model} ${x.quality} | STOCK ${x.stock}`).join("\\n"))}if(b.id==="btnCopyDebt"){let a=db.sales.filter(x=>!x.paid);copy("VENTAS POR COBRAR\\n"+a.map(x=>`- ${x.client||"SIN CLIENTE"} | ${x.itemName} | ${money(x.total??x.price)}`).join("\\n"))}if(b.dataset.close!==undefined)close();if(b.dataset.edit)openItem(b.dataset.edit);if(b.dataset.act)openAction(b.dataset.act,b.dataset.id);if(b.dataset.pay){$("payId").value=b.dataset.pay;$("payNote").value="";open("payModal")}if(b.dataset.del&&confirm("¿Borrar artículo?")){db.items=db.items.filter(x=>x.id!==b.dataset.del);save()}if(b.dataset.delSale&&confirm("¿Borrar venta?")){db.sales=db.sales.filter(x=>x.id!==b.dataset.delSale);save()}if(b.dataset.delRec){let [list,id]=b.dataset.delRec.split(":"),map={failsList:"fails",internalList:"internal",logList:"log"},k=map[list];if(k&&confirm("¿Borrar registro?")){db[k]=db[k].filter(x=>x.id!==id);save()}}if(b.dataset.clear&&confirm("¿Limpiar sección?")){db[b.dataset.clear]=[];save()}})
 let composingText=false;
-document.addEventListener("compositionstart",()=>{composingText=true});
-document.addEventListener("compositionend",e=>{
-  composingText=false;
-  if(e.target&&e.target.matches("#search,#brandFilter,#stockFilter"))render();
-});
-document.addEventListener("input",e=>{
-  const el=e.target;
+  document.addEventListener("compositionstart",()=>{composingText=true});
+  document.addEventListener("compositionend",e=>{
+    composingText=false;
+    if(e.target&&e.target.matches("#search,#brandFilter,#stockFilter"))render();
+  });
+  document.addEventListener("input",e=>{
+    const el=e.target;
 
-  // BUSCADOR: convertir a MAYÚSCULAS sin romper espacios en iPhone.
-  if(el.matches("#search")){
-    const start=el.selectionStart;
-    const end=el.selectionEnd;
-    const upper=String(el.value||"").toUpperCase();
-
-    if(el.value!==upper){
-      el.value=upper;
-      try{el.setSelectionRange(start,end)}catch(err){}
+    if(el.matches("#search")){
+      const start=el.selectionStart;
+      const end=el.selectionEnd;
+      const upper=String(el.value||"").toUpperCase();
+      if(!composingText&&el.value!==upper){
+        el.value=upper;
+        try{el.setSelectionRange(start,end)}catch(err){}
+      }
+      render();
+      return;
     }
 
-    render();
-    return;
-  }
-
-  if(el.matches("#brandFilter,#stockFilter")){
-    render();
-    return;
-  }
-
-  // FORMULARIOS: mayúsculas sin borrar espacios.
-  if(!composingText&&el.matches("input:not([type=number]):not([type=date]):not([type=datetime-local]):not(#search),textarea")){
-    const start=el.selectionStart;
-    const end=el.selectionEnd;
-    const upper=String(el.value||"").toUpperCase();
-    if(el.value!==upper){
-      el.value=upper;
-      try{el.setSelectionRange(start,end)}catch(err){}
+    if(el.matches("#brandFilter,#stockFilter")){
+      render();
+      return;
     }
-  }
-});
-document.querySelectorAll(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)close()});$("fileInput").onchange=importJSON;$("date").value=today();document.addEventListener("gesturestart",e=>e.preventDefault());let last=0;document.addEventListener("touchend",e=>{let n=Date.now();if(n-last<=300)e.preventDefault();last=n},{passive:false});render();
+
+    if(!composingText&&el.matches("input:not([type=number]):not([type=date]):not([type=datetime-local]):not(#search),textarea")){
+      const start=el.selectionStart;
+      const end=el.selectionEnd;
+      const upper=String(el.value||"").toUpperCase();
+      if(el.value!==upper){
+        el.value=upper;
+        try{el.setSelectionRange(start,end)}catch(err){}
+      }
+    }
+  });
+  document.querySelectorAll(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)close()});$("fileInput").onchange=importJSON;$("date").value=today();document.addEventListener("gesturestart",e=>e.preventDefault());let last=0;document.addEventListener("touchend",e=>{let n=Date.now();if(n-last<=300)e.preventDefault();last=n},{passive:false});if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
+  render();
 })();
 </script>
 </body></html>

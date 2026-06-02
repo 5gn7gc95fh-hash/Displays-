@@ -28,3 +28,14 @@ Funciones:
 ## Respaldo total
 
 El botón **Respaldo total** guarda inventario completo, ventas, garantías/fallas, uso interno, bitácora, metadatos y una copia del almacenamiento local de la app.
+
+
+## Versión Realme 6 Pro / Android
+
+- Teclado Android más estable.
+- Buscador y formularios en MAYÚSCULAS sin bloquear espacios.
+- Botones más grandes para pantalla móvil.
+- Mejor adaptación a pantalla 20:9.
+- PWA instalable desde Chrome.
+- Caché básica con `sw.js`.
+- Mantiene respaldo total.

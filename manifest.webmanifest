@@ -5,7 +5,7 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f3f8ff",
+  "background_color": "#f4f8ff",
   "theme_color": "#061f4a",
   "icons": [
     {
@@ -19,6 +19,29 @@
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "productivity",
+    "business",
+    "utilities"
+  ],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "shortcuts": [
+    {
+      "name": "Inventario",
+      "short_name": "Inventario",
+      "url": "./?tab=inventory",
+      "description": "Abrir inventario"
+    },
+    {
+      "name": "Por pedir",
+      "short_name": "Por pedir",
+      "url": "./?tab=order",
+      "description": "Ver pantallas por pedir"
     }
   ]
 }

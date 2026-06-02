@@ -1,0 +1,14 @@
+VERSIÓN OPTIMIZADA PARA REALME 6 PRO / ANDROID
+
+1. Descomprime el ZIP.
+2. Sube los archivos sueltos a GitHub.
+3. Activa GitHub Pages: Settings > Pages > main / root.
+
+MEJORAS:
+- Teclado Android corregido.
+- Mayúsculas automáticas.
+- Espacios funcionando en buscador.
+- Botones más cómodos.
+- App instalable desde Chrome.
+- Service Worker para caché.
+- Respaldo total.
