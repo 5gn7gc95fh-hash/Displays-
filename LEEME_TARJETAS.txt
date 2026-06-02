@@ -1,0 +1,7 @@
+DISEÑO TIPO TARJETAS
+
+1. Descomprime el ZIP.
+2. Sube los archivos sueltos a GitHub.
+3. Activa GitHub Pages: Settings > Pages > main / root.
+
+Mantiene todas las funciones importantes.
