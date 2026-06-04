@@ -1,0 +1,9 @@
+CORRECCIÓN BOTÓN VENTAS
+
+- Se agregó manejo dedicado para las pestañas.
+- El botón Ventas abre la sección sales sin depender del manejador general.
+- Se cambió el service worker para evitar caché vieja.
+- Abre la web con ?v=fixventas1 después de subir a GitHub Pages.
+
+IMPORTANTE:
+Sube todos los archivos sueltos y reemplaza los anteriores.
