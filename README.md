@@ -1,5 +1,1 @@
-# Inventario de Displays - Diseño tipo tarjetas
-
-Versión completa para GitHub Pages.
-
-Incluye inventario, ventas, ventas por cobrar, marcar cobro, garantías/fallas, uso interno, bitácora, por pedir, búsqueda/filtros, mayúsculas automáticas, espacios funcionando, respaldo total, importar JSON, PWA instalable y caché.
+Inventario de Displays Ultra. Sube los archivos sueltos a GitHub Pages. Abre con ?v=ultra1 para evitar cache vieja.

@@ -1,0 +1,1 @@
+VERSION HECHA BIEN: diseño dashboard/tarjetas, respaldo total, importador compatible, busqueda global, ventas, garantias, interno, bitacora, por pedir.
