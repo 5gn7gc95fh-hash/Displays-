@@ -1,19 +1,13 @@
 {
-  "name": "Inventario de Displays Ultra",
+  "name": "Inventario de Displays",
   "short_name": "Displays",
-  "start_url": "./?v=fixventas2",
+  "start_url": "./?v=menu1",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#07172f",
   "background_color": "#edf6ff",
   "icons": [
-    {
-      "src": "logo.png",
-      "sizes": "1024x1024",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
     {
       "src": "icon.svg",
       "sizes": "512x512",

@@ -1,0 +1,1 @@
+Nuevo diseño sin barra inferior. Sube archivos sueltos y abre con ?v=menu1
