@@ -1,0 +1,15 @@
+FIX DEFINITIVO BOTÓN VENTAS
+
+Qué se corrigió:
+- La navegación de pestañas ahora usa un listener separado en fase de captura.
+- El botón Ventas ya no depende del manejador general de botones.
+- Se agregó soporte touchend para Android/Realme.
+- Se limpió caché vieja con un nuevo service worker.
+- Abre con ?v=fixventas2
+
+MUY IMPORTANTE:
+1. Sube TODOS los archivos sueltos reemplazando los anteriores.
+2. En Chrome Android abre:
+   tu-url/?v=fixventas2
+3. Si aún ves lo viejo:
+   Chrome > menú ⋮ > Historial > Borrar datos de navegación > imágenes y archivos en caché.

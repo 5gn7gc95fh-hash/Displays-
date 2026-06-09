@@ -1,7 +1,7 @@
 {
   "name": "Inventario de Displays Ultra",
   "short_name": "Displays",
-  "start_url": "./?v=fixventas1",
+  "start_url": "./?v=fixventas2",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
